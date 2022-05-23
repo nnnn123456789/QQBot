@@ -1,0 +1,6 @@
+0715.log
+quiz.txt
+settings.ini
+*.pyc
+__pycache__/*
+stardict.db
