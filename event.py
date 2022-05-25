@@ -195,6 +195,7 @@ def on_group_users_add(m):
         send_group_message(m["group_id"], ("[CQ:at,qq=%d]" % int(m["user_id"])) + bnu_wel_msg);
         #set_group_card(m["group_id"],m["user_id"], U"??-??-请修改群名片")
     else:
+        pass
         #ret = send_group_message(m["group_id"], "欢迎新同学[CQ:at,qq=%d]，改个群名片，向大家介绍一下自己吧" % int(m["user_id"]))
     #set_group_ban(m["user_id"], m["group_id"], 5 * 60)
     print("欢迎成功")
