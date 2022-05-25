@@ -15,7 +15,7 @@ def send_private_message (user_id, message, auto_escape=False, group_id = 0):
         r1 = send_private_message (user_id, message[:120], auto_escape, group_id)
         r2 = send_private_message (user_id, message[120:], auto_escape, group_id)
         return r1 + r2;
-    #group_id = 0; ##disallow private msg via group
+    group_id = 0; ##disallow private msg via group
     #return;
     url = host_addr + 'send_private_msg'
     if (group_id == 0):

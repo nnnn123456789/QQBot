@@ -191,11 +191,11 @@ def on_group_users_add(m):
     if allow_fun == "False":
         return;
     if is_bnugroup(m["group_id"]):
-        send_private_message(m["user_id"], bnu_wel_msg, group_id = m["group_id"]);
-        send_group_message(m["group_id"], ("[CQ:at,qq=%ld]" % int(m["user_id"])) + bnu_wel_msg);
+        #send_private_message(m["user_id"], bnu_wel_msg, group_id = m["group_id"]);
+        send_group_message(m["group_id"], ("[CQ:at,qq=%d]" % int(m["user_id"])) + bnu_wel_msg);
         #set_group_card(m["group_id"],m["user_id"], U"??-??-请修改群名片")
     else:
-        ret = send_group_message(m["group_id"], "欢迎新同学[CQ:at,qq=%ld]，改个群名片，向大家介绍一下自己吧" % int(m["user_id"]))
+        #ret = send_group_message(m["group_id"], "欢迎新同学[CQ:at,qq=%d]，改个群名片，向大家介绍一下自己吧" % int(m["user_id"]))
     #set_group_ban(m["user_id"], m["group_id"], 5 * 60)
     print("欢迎成功")
 
