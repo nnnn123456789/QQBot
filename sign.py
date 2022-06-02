@@ -60,11 +60,17 @@ def getlist(args, groupid, qqid):
 
 def add(args, groupid, qqid):
     role = get_group_member_role(groupid, qqid);
-    if(get_authlevel(qqid, groupid)<10):
-        return "权限不足，请重试"
-    elif not len(args) == 3: 
+    if not len(args) == 3:
         return "请求参数错误"
-    aimqqid = read_qqid(args[1]);
+    aimqqid = read_qqid(args[1]); 
+       
+    if(get_authlevel(qqid, groupid)<10):
+        if(aimqqid == qqid and int(args[2]) < 0):
+            add_points(aimqqid, groupid, int(args[2]))
+            return "执行成功，%d当前的积分为%d" % (aimqqid, get_points(aimqqid, groupid))
+        else:
+            return "权限不足，请重试"
+
     add_points(aimqqid, groupid, int(args[2]));
     return "执行成功，%d当前的积分为%d" % (aimqqid, get_points(aimqqid, groupid))
 
