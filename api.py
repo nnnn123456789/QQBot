@@ -1,3 +1,4 @@
+from msilib.schema import Error
 import requests;
 import json;
 
@@ -5,6 +6,37 @@ global group_ans_pool2;
 group_ans_pool2 = {}
 
 host_addr = 'http://127.0.0.1:5700/'
+
+
+class CommandError(Exception):
+    pass
+class executer:
+    
+    def __init__(self):
+        self.handle_dict = {};
+    
+    def __call__(self, api_name : str, paras : dict):
+        func = self.handle_dict.get(api_name);
+        if func == None:
+            raise CommandError("command not found")
+        return func(paras)
+
+
+class event:
+
+    def __init__(self, handle, api_request = [], **kwargs):
+        self.api_request = api_request
+        self.handle = handle
+        self.executer = None
+    
+
+    def set_executer(self, executer : executer):
+        self.executer = executer
+
+    
+    def __call__(self, user_id, channel_id, *args):
+        return self.handle(user_id, channel_id, self.executer, *args)
+
 
 def get_group_ans_pool():
     return group_ans_pool2;
