@@ -10,10 +10,15 @@ host_addr = 'http://127.0.0.1:5700/'
 
 class CommandError(Exception):
     pass
-class executer:
+class Executer:
     
     def __init__(self):
         self.handle_dict = {};
+
+    
+    def add(self, name:str, func):
+        self.handle_dict["name"] = func
+
     
     def __call__(self, api_name : str, paras : dict):
         func = self.handle_dict.get(api_name);
@@ -22,7 +27,7 @@ class executer:
         return func(paras)
 
 
-class event:
+class Event:
 
     def __init__(self, handle, api_request = [], **kwargs):
         self.api_request = api_request
@@ -30,12 +35,25 @@ class event:
         self.executer = None
     
 
-    def set_executer(self, executer : executer):
+    def set_executer(self, executer : Executer):
         self.executer = executer
 
     
     def __call__(self, user_id, channel_id, *args):
         return self.handle(user_id, channel_id, self.executer, *args)
+
+
+class event_pool:
+
+    def __init__(self):
+        self.cmdpool = {}
+        self.apipool = {}
+
+    def add(self, command : str, event : Event):
+        api_exec = Executer()
+        #for i in 
+
+
 
 
 def get_group_ans_pool():
