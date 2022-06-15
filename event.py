@@ -67,6 +67,8 @@ class Command:
 group_ans_pool = {}
 #global group_ans_pool2
 #group_ans_pool2 = {}
+group_ans_pool3 = {}
+
 
 group_ans_pool2["#允许命令"] = Command(group_silent.commands_allow, 11, 0)
 group_ans_pool2["#禁止命令"] = Command(group_silent.commands_disallow, 11, 0)
@@ -179,8 +181,7 @@ def on_group_manager_change(m):
 def on_group_users_add(m):
     #return;
     print("新人加群")
-    if (int(m["group_id"]) in [777013031]):
-        return;
+
     bnu_wel_msg = "欢迎新同学，改个群名片，向大家介绍一下自己吧。名片格式为 入学年-院系专业-昵称，如" + '"21-法学-张三"' + "，注意【不要使用自己的真实姓名】。\n" + \
         "院系群号，培养方案，转专业，大学英语，师大地图等基本问题相关信息请在群文件中自取。\n" +  \
         "除了随录取通知书发放的学宿费缴费通知外，师大及各部院系不会以任何理由收取任何费用，所有交钱可以选老师/交钱可以选宿舍的都是谎言，谨防诈骗。\n" +  \
