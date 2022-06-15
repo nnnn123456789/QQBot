@@ -111,9 +111,9 @@ def roshambo(args, groupid, qqid):
     if(len(args)!= 2):
         return "参数错误"
     
-    stone = ["石头", "stone", "rock", "锤子", "石", "锤", "拳头", "拳", "chuizi", "chui", "shi", "shitou", "quantou", "quan", "0", "零", "〇", "ling", "riot"]
-    scissors  = ["剪刀", "scissors" , "剪", "剪子", "jiandao", "jian", "jianzi", "2", "二", "er", "two"]
-    paper = ["布", "paper", "cloth", "纸", "包", "包袱", "bu", "zhi", "bao", "baofu", "5", "五", "wu", "five", "zero", "o", "O"]
+    stone = ["石头", "stone", "rock", "锤子", "石", "锤", "拳头", "拳", "chuizi", "chui", "shi", "shitou", "quantou", "quan", "ling", "riot", "0", "零", "zero", "o", "O", "〇", "Ｏ", "０"]
+    scissors  = ["剪刀", "scissors" , "剪", "剪子", "jiandao", "jian", "jianzi", "2", "二", "er", "two", "v", "V", "victory", "胜", "胜利", "sheng", "shengli", "Ｖ", "ｖ", "２"]
+    paper = ["布", "paper", "cloth", "纸", "包", "包袱", "bu", "zhi", "bao", "baofu", "5", "五", "wu", "five", "shou", "hand", "手", "５"]
     user = 0; s = args[1];
     if s in stone:
         user = 1;
