@@ -28,7 +28,7 @@ def sign(args, groupid, qqid):
     add_points(qqid, groupid, point);  
     db.commit()                     #db.commit()
     #send_private_message(qqid, "签到成功，本次获得积分%d点" % point, group_id = groupid);
-    return "[CQ:at,qq=%d]签到成功，本次获得积分%d点" % (qqid, point);
+    return "[CQ:at,qq=%d]签到成功, 连续签到%d天, 本次获得积分%d点" % (qqid, contdays, point);
 
 
 
