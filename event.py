@@ -183,7 +183,7 @@ def on_group_users_add(m):
     print("新人加群")
 
     execute("INSERT INTO group_increase_log (time, sub_type, group_id, operator_id, user_id) VALUES (%d, '%s', %d, %d, %d)" % (
-        time.time(), m["sub_type"], m["group_id"],  m["operator_id"],  m["user_id"]))
+        int(time.time()), m["sub_type"], m["group_id"],  m["operator_id"],  m["user_id"]))
     bnu_wel_msg = "欢迎新同学，改个群名片，向大家介绍一下自己吧。名片格式为 入学年-院系专业-昵称，如" + '"22-法学-张三"' + "，注意【不要使用自己的真实姓名】。\n" + \
         "院系群号，培养方案，转专业，大学英语，师大地图等基本问题相关信息请在群文件中自取。\n" +  \
         "除了随录取通知书发放的学宿费缴费通知外，师大及各部院系不会以任何理由收取任何费用，所有交钱可以选老师/交钱可以选宿舍的都是谎言，谨防诈骗。\n" +  \
@@ -202,6 +202,7 @@ def on_group_users_add(m):
         #ret = send_group_message(m["group_id"], "欢迎新同学[CQ:at,qq=%d]，改个群名片，向大家介绍一下自己吧" % int(m["user_id"]))
     #set_group_ban(m["user_id"], m["group_id"], 5 * 60)
     print("欢迎成功")
+    db.commit()
 
 
 def on_group_users_delete(m):
@@ -235,8 +236,9 @@ def on_request_group_invite(m):
     sub_type =  m["sub_type"]
 
     execute("INSERT INTO group_request_log (time, sub_types, group_id, user_id, comment) VALUES (%d, '%s', %d, %d, '%s' )" % (
-        time.time(), sub_type, groupid,  m["user_id"], comment))
+        int(time.time()), sub_type, groupid,  m["user_id"], comment))
     
+    db.commit()
 
 
 
