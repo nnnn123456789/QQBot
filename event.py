@@ -182,6 +182,8 @@ def on_group_users_add(m):
     #return;
     print("新人加群")
 
+    execute("INSERT INTO group_increase_log (time, sub_type, group_id, operator_id, user_id) VALUES (%d, '%s', %d, %d, %d)" % (
+        time.time(), m["sub_type"], m["group_id"],  m["operator_id"],  m["user_id"]))
     bnu_wel_msg = "欢迎新同学，改个群名片，向大家介绍一下自己吧。名片格式为 入学年-院系专业-昵称，如" + '"22-法学-张三"' + "，注意【不要使用自己的真实姓名】。\n" + \
         "院系群号，培养方案，转专业，大学英语，师大地图等基本问题相关信息请在群文件中自取。\n" +  \
         "除了随录取通知书发放的学宿费缴费通知外，师大及各部院系不会以任何理由收取任何费用，所有交钱可以选老师/交钱可以选宿舍的都是谎言，谨防诈骗。\n" +  \
@@ -224,20 +226,28 @@ def on_request_friend_add(m):
     pass
 
 
+#申请或邀请
 def on_request_group_invite(m):
     print(m)
     comment = m["comment"]
     groupid = m["group_id"]
-    flag = m["flag"]
+    #flag = m["flag"]
     sub_type =  m["sub_type"]
-    if (is_bnu_studentid(comment) and is_bnugroup(groupid)):
-        set_group_add_request(flag, sub_type, True);
-        print("依照学号放人成功");
-        return
-    if (sub_type == "invite" and is_bnugroup(groupid)):
-        set_group_add_request(flag, sub_type, True);
-        print("邀请放人成功");
-        return
+
+    execute("INSERT INTO group_request_log (time, sub_types, group_id, user_id, comment) VALUES (%d, '%s', %d, %d, '%s' )" % (
+        time.time(), sub_type, groupid,  m["user_id"], comment))
+    
+
+
+
+    # if (is_bnu_studentid(comment) and is_bnugroup(groupid)):
+    #     set_group_add_request(flag, sub_type, True);
+    #     print("依照学号放人成功");
+    #     return
+    # if (sub_type == "invite" and is_bnugroup(groupid)):
+    #     set_group_add_request(flag, sub_type, True);
+    #     print("邀请放人成功");
+    #     return
     #if ("答案：21新生" in comment and 1056925222 == groupid):
     #    set_group_add_request(flag, sub_type, True);
     #    print("21新生放人成功");
