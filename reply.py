@@ -11,9 +11,9 @@ def reply_private(args, groupid, qqid):
     if(len(args) != 3):
         return "参数错误"
     elif(len(args) == 3):
-        qqid = args[1]
+        aim_qqid = args[1]
         remsg = "%s向您发送了一条回复消息如下:\n%s" % (qqid, args[2])
-        send_private_message(qqid, remsg)
+        send_private_message(aim_qqid, remsg)
         return "回复成功"
 
 
