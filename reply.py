@@ -23,9 +23,9 @@ def reply_temp(args, groupid, qqid):
     if(len(args) != 4):
         return "参数错误"
     elif(len(args) == 4):
-        qqid = args[1]
+        aim_qqid = args[1]
         aim_groupid = args[2]
         remsg = "%s向您发送了一条回复消息如下:\n%s" % (qqid, args[3])
         send_private_message(qqid, remsg)
-        send_private_message_by_group (qqid, aim_groupid, remsg)
+        send_private_message_by_group (aim_qqid, aim_groupid, remsg)
         return "回复行为未返回异常"
