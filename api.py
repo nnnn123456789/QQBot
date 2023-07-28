@@ -85,7 +85,12 @@ def send_private_message_by_group (user_id, group_id, message, auto_escape=False
     
     
 def send_group_message(group_id, message, auto_escape=False):
-    #return;
+    print(message);
+    if group_id == 864011653:
+        return;
+        pass
+    
+    # return;
     url = host_addr + 'send_group_msg'
     d = {'group_id':group_id,'message': message,'auto_escape': auto_escape}
     r = requests.post(url, data=d)

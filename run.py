@@ -6,8 +6,8 @@ import json
 
 def on_message(ws, message):
 	msg = json.loads(message)
-	#print(msg);
-	print(" ");
+	# print(msg);
+	# print(" ");
 	#print(" ");
 	if (msg["post_type"] == "message"):
 		if(msg["message_type"] == "private"):

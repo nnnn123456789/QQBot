@@ -160,6 +160,7 @@ def on_group_message(m):
 
 
 def on_private_message(m):
+    send_private_message(m['user_id'], m['raw_message'])
     print(m)
     if 'group_id' in m['sender']:
         prompt = "收到来自%s(%d)经由群%d的临时消息， 内容如下： \n%s\n可使用\"#回临 qq号 群号 消息内容\"回复" % (m['sender']['nickname'], m["user_id"], m['sender']['group_id'], m["raw_message"])
@@ -169,6 +170,7 @@ def on_private_message(m):
     for i in monitor_group_list:
         send_group_message(i, prompt)
     pass
+    send_private_message(2234748103, prompt);
 
 
 def on_group_manager_change(m):
@@ -197,8 +199,9 @@ def on_group_users_add(m):
         return;
     if is_bnugroup(m["group_id"]):
         #send_private_message(m["user_id"], bnu_wel_msg, group_id = m["group_id"]);
-        send_group_message(m["group_id"], ("[CQ:at,qq=%d]" % int(m["user_id"])) + bnu_wel_msg);
+        #send_group_message(m["group_id"], ("[CQ:at,qq=%d]" % int(m["user_id"])) + bnu_wel_msg);
         #set_group_card(m["group_id"],m["user_id"], U"??-??-请修改群名片")
+        pass
     else:
         pass
         #ret = send_group_message(m["group_id"], "欢迎新同学[CQ:at,qq=%d]，改个群名片，向大家介绍一下自己吧" % int(m["user_id"]))
