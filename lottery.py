@@ -21,22 +21,25 @@ def get_dice(all_rewards):
                 
 def lottery(args, groupid, qqid):
     now_time = time.time();
-    
-    n = execute('SELECT * FROM lottery_history WHERE qqid = %d and groupid = %d and time > %d' % (qqid, groupid, now_time - 8*3600))
+    lottery_limit_time_shijian = 24; #hours
+    lottery_limit_time_cishu = 1;
+    lottery_limit_time_lianchou = 5;
+
+    n = execute('SELECT * FROM lottery_history WHERE qqid = %d and groupid = %d and time > %d' % (qqid, groupid, now_time - lottery_limit_time_shijian*3600))
     
     lottery_time = 1
     if(len(args) == 2):
         lottery_time = int(args[1]);
-    if(lottery_time>10):
-        lottery_time=10;
+    if(lottery_time>lottery_limit_time_lianchou):
+        lottery_time=lottery_limit_time_lianchou;
     if(lottery_time<1):
         lottery_time=1;
-    if(n >= 3):
+    if(n >= lottery_limit_time_cishu):
         execute("INSERT INTO lottery_history (time, qqid, groupid, name) VALUES (%d, %d, %d, '%s')" % (now_time, qqid, groupid, "刷屏警告"))
         db.commit()
         set_group_ban(qqid, groupid, 10 * (2 ** (n))); 
         #send_private_message(qqid, "您在过去8小时中参与抽奖%d次，已触发刷屏警告"  % n);
-        return "请不要刷屏"
+        return "请不要刷屏, 当前抽奖限制为：每%d小时只能抽奖%d次, 最多允许%d连抽" %(lottery_limit_time_shijian, lottery_limit_time_cishu, lottery_limit_time_lianchou)
     if(n + lottery_time >= 3):
         #lottery_time = 3 - n;
         pass
