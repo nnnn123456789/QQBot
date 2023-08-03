@@ -10,14 +10,18 @@ def sleep(args, groupid, qqid):
 
 
 def sleep_v2(args, groupid, qqid):
+    prompt = ""
     if len(args) == 1: 
         set_group_ban(qqid, groupid, 8*3600);
+        prompt += ("%d已进入睡眠\n" % qqid)
     else:
         for qq in args[1:]:
             aimqqid = read_qqid(args[1]);
             if(get_authlevel(qqid, groupid)<5):
-                return "权限不足，请重试"
+                prompt += ("禁言%d权限不足，请重试\n" % qqid)
             elif(get_authlevel(qqid, groupid)<=get_authlevel(aimqqid, groupid)):
-                return "权限不足，请重试"
-            set_group_ban(aimqqid, groupid, 8*3600);
-    return ""
+                prompt += ("禁言%d权限不足，请重试\n" % qqid)
+            else:
+                set_group_ban(aimqqid, groupid, 8*3600);
+                prompt += ("%d已进入睡眠\n" % aimqqid)
+    return prompt[:-1]
