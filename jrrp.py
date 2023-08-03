@@ -37,8 +37,9 @@ def get_jrrp(qqid):
 
 def jrrp(args, groupid, qqid):
     rand_dict = ""
+    rand_dict = get_random_dict();
     if(len(args) == 1):
-        return "[CQ:at,qq=%d]的人品值是：%d" %(qqid, get_jrrp(qqid))
+        return "[CQ:at,qq=%d]的人品值是：%d\n\n%s" %(qqid, get_jrrp(qqid), rand_dict)
     elif(len(args) == 2):
         aimqqid = read_qqid(args[1]);
         if(get_authlevel(qqid, groupid)<5):
@@ -47,5 +48,5 @@ def jrrp(args, groupid, qqid):
             return "权限不足，请重试"
         else:
             n = get_jrrp(aimqqid);
-        return "%d的人品值是：%d" %(aimqqid, n);
+        return "%d的人品值是：%d\n\n%s" %(aimqqid, n, rand_dict);
 

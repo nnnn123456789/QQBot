@@ -4,11 +4,14 @@ from api import *;
 from lib import *;
 from jrrp import *;
 from auth import *;
+from dictsearch import get_random_dict;
 
 def get_signpoints(qqid, groupid, contdays):
 	return 20 + 5 * min(15,contdays) + get_jrrp(qqid)//20;
 
 def sign(args, groupid, qqid):
+    rand_dict = ""
+    rand_dict = get_random_dict();
     n = cursor.execute('SELECT lastsign, contdays FROM sign WHERE qqid = %d and groupid = %d' % (qqid,groupid))
     today = date.date();
     if(n == 0):
@@ -20,7 +23,7 @@ def sign(args, groupid, qqid):
             contdays = contdays+1;
         elif (lastsign == today):
             #send_private_message(qqid, "已经签到过了" , group_id = groupid);
-            return "[CQ:at,qq=%d]已经签到过了" % qqid; 
+            return "[CQ:at,qq=%d]已经签到过了\n%s" % (qqid, rand_dict) ; 
         else:
             contdays = 1;
         execute('UPDATE sign SET lastsign=%d, contdays=%d WHERE qqid = %d AND groupid = %d' % (today, contdays, qqid, groupid));
@@ -28,7 +31,7 @@ def sign(args, groupid, qqid):
     add_points(qqid, groupid, point);  
     db.commit()                     #db.commit()
     #send_private_message(qqid, "签到成功，本次获得积分%d点" % point, group_id = groupid);
-    return "[CQ:at,qq=%d]签到成功, 连续签到%d天, 本次获得积分%d点" % (qqid, contdays, point);
+    return "[CQ:at,qq=%d]签到成功, 连续签到%d天, 本次获得积分%d点\n\n%s" % (qqid, contdays, point, rand_dict);
 
 
 
