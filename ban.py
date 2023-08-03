@@ -40,6 +40,25 @@ def kick(args, groupid, qqid):
     return ""
 
 
+def kick_v2(args, groupid, qqid):
+    prompt = ""
+    if len(args) == 1: 
+        return "请求参数错误"
+    else:
+        for qq in args[1:]:
+            try:
+                aimqqid = read_qqid(args[1]);
+                if(get_authlevel(qqid, groupid)<7):
+                    prompt += ("踢出%d权限不足，请重试\n" % qqid)
+                elif(get_authlevel(qqid, groupid)<=get_authlevel(aimqqid, groupid)):
+                    prompt += ("踢出%d权限不足，请重试\n" % qqid)
+                else:
+                    set_group_ban(aimqqid, groupid, 8*3600);
+                    prompt += ("%d已踢出\n" % aimqqid)
+            except:
+                prompt += "执行错误\n"
+    return prompt[:-1]
+
 def callback(args, groupid, qqid):
     print(args);
     if not (len(args) == 2 or len(args) == 3):
