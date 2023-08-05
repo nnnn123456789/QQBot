@@ -85,7 +85,7 @@ group_ans_pool2["#查群号"] = Command(ban.tell_groupid, 1, 1)
 group_ans_pool2["#允许娱乐"] = Command(group_silent.fun_allow, 9, 1)
 group_ans_pool2["#禁止娱乐"] = Command(group_silent.fun_disallow, 9, 1)
 
-group_ans_pool2["#echo"] = Command(echo.echo, 1, 2)
+group_ans_pool2["#echo"] = Command(echo.echo, 5, 2)
 group_ans_pool2["#jrrp"] = Command(jrrp.jrrp, 1, 2, "#jrrp")
 group_ans_pool2["#签到"] = Command(sign.sign, 1, 2, "#签到")
 group_ans_pool2["#积分查询"] = Command(sign.getpoints, 1, 2)
