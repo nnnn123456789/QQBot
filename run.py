@@ -30,6 +30,8 @@ def on_message(ws, message):
 			on_group_message_recall(msg);	
 		elif(msg["notice_type"] == "friend_recall"):
 			on_private_message_recall(msg);				
+						
+				
 	elif(msg["post_type"] == "request"):		
 		if(msg["request_type"] == "friend"):
 			on_request_friend_add(msg);
