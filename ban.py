@@ -47,15 +47,16 @@ def kick_v2(args, groupid, qqid):
     else:
         for qq in args[1:]:
             try:
-                aimqqid = read_qqid(args[1]);
+                aimqqid = read_qqid(qq);
                 if(get_authlevel(qqid, groupid)<7):
                     prompt += ("踢出%d权限不足，请重试\n" % qqid)
                 elif(get_authlevel(qqid, groupid)<=get_authlevel(aimqqid, groupid)):
                     prompt += ("踢出%d权限不足，请重试\n" % qqid)
                 else:
-                    set_group_ban(aimqqid, groupid, 8*3600);
+                    set_group_kick(aimqqid, groupid);
                     prompt += ("%d已踢出\n" % aimqqid)
-            except:
+            except BaseException as ex:
+                print(ex)
                 prompt += "执行错误\n"
     return prompt[:-1]
 
