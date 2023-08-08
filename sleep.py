@@ -16,7 +16,7 @@ def sleep_v2(args, groupid, qqid):
         prompt += ("%d已进入睡眠\n" % qqid)
     else:
         for qq in args[1:]:
-            aimqqid = read_qqid(args[1]);
+            aimqqid = read_qqid(qq);
             if(get_authlevel(qqid, groupid)<5):
                 prompt += ("禁言%d权限不足，请重试\n" % qqid)
             elif(get_authlevel(qqid, groupid)<=get_authlevel(aimqqid, groupid)):

@@ -76,9 +76,9 @@ group_ans_pool2["#禁止命令"] = Command(group_silent.commands_disallow, 11, 0
 group_ans_pool2["#添加自动回复"] = Command(autoreply.add_auto_reply, 11, 1)
 group_ans_pool2["#执行"] = Command(database.literal_execute, 12, 1)
 group_ans_pool2["#禁言"] = Command(ban.ban, 1, 1)
-group_ans_pool2["#踢"] = Command(ban.kick, 1, 1)
+group_ans_pool2["#踢"] = Command(ban.kick_v2, 1, 1)
 group_ans_pool2["#解禁"] = Command(ban.unban, 5, 1)
-group_ans_pool2["#T"] = Command(ban.kick, 1, 1)
+group_ans_pool2["#T"] = Command(ban.kick_v2, 1, 1)
 group_ans_pool2["#撤回"] = Command(ban.callback, 1, 1, "#撤回")
 group_ans_pool2["#查群号"] = Command(ban.tell_groupid, 1, 1)
 
@@ -214,7 +214,10 @@ def on_group_users_delete(m):
     allow_fun = get_var(m["group_id"], "allow_fun", "True")
     if allow_fun == "False":
         return;
-    ret = send_group_message(m["group_id"], "成员%d已退出该群" % int(m["user_id"]));
+    if m["sub_type"] == "leave":
+        ret = send_group_message(m["group_id"], "成员%d已退出该群" % int(m["user_id"]));
+    elif m["sub_type"] == "kick":
+        ret = send_group_message(m["group_id"], "成员%d已被管理员踢出" % int(m["user_id"]));
     #print(ret);
     print("人员离群")
     pass
