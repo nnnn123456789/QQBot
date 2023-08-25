@@ -21,6 +21,7 @@ import ticket
 import quiz
 import dictsearch
 import reply
+import bnu
 from bnu import is_bnugroup, is_bnu_studentid
 
 
@@ -127,6 +128,14 @@ group_ans_pool2["#mai1"] = Command(ticket.mall, 1, 2, "#积分商城")
 
 group_ans_pool2["#回私"] = Command(reply.reply_private, 1, 1)
 group_ans_pool2["#回临"] = Command(reply.reply_temp, 11, 1)
+
+group_ans_pool2["#reg"] = Command(bnu.register_BNU, 1, 1)
+group_ans_pool2["#verify"] = Command(bnu.verify_BNU, 1, 1)
+group_ans_pool2["#code"] = Command(bnu.request_code, 1, 1)
+group_ans_pool2["#+bnu"] = Command(bnu.add_BNU, 7, 1)
+group_ans_pool2["#bnu+"] = Command(bnu.add_BNU, 7, 1)
+group_ans_pool2["#-bnu"] = Command(bnu.remove_BNU, 7, 1)
+group_ans_pool2["#bnu-"] = Command(bnu.remove_BNU, 7, 1)
 
 
 def on_group_message(m):
