@@ -169,7 +169,8 @@ def on_group_message(m):
 
 
 def on_private_message(m):
-    send_private_message(m['user_id'], m['raw_message'])
+    #send_private_message(m['user_id'], m['raw_message'])
+    send_private_message(m['user_id'], '你的消息已被收到并转发至机器人管理员')
     print(m)
     if 'group_id' in m['sender']:
         prompt = "收到来自%s(%d)经由群%d的临时消息， 内容如下： \n%s\n可使用\"#回临 qq号 群号 消息内容\"回复" % (m['sender']['nickname'], m["user_id"], m['sender']['group_id'], m["raw_message"])
