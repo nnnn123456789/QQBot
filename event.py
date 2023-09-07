@@ -242,6 +242,7 @@ def on_group_document_upload(m):
 
 
 def on_request_friend_add(m):
+    set_friend_add_request(m['flag'], True);
     pass
 
 

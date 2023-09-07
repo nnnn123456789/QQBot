@@ -179,6 +179,12 @@ def set_group_add_request(flag, type, approve = True, reason = ""):
     r = requests.post(url, data=d)
     return json.loads(r.text)["data"];
 
+    
+def set_friend_add_request(flag, approve = True, remark = ""):
+    url = host_addr + 'set_friend_add_request'
+    d = {'flag':flag,'approve':approve,'remark':remark }
+    r = requests.post(url, data=d)
+    return json.loads(r.text)["data"];
 
 
 def set_group_card(group_id, user_id, card = ""):
